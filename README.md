@@ -1,1 +1,1 @@
-# kap-starter-netlify
+# starter

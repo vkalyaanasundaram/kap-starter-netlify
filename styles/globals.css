@@ -1,0 +1,365 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+.inactive {
+  display: none;
+}
+.active {
+  display: block !important;
+}
+.active-scroll-spy {
+  background-color: yellowgreen;
+  border-radius: 15px;
+}
+.carouselContent p {
+  color: #fff !important;
+}
+.mapboxgl-control-container {
+  display: none;
+}
+.blogImgSize {
+  width: 300px;
+  height: auto;
+}
+.blogImg {
+  float: left;
+  margin-right: 10px;
+}
+.blogContent {
+  margin-left: 10px;
+}
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #00395d;
+  color: #fff;
+  padding: 20px;
+  font-size: 20px;
+  z-index: 999;
+  text-align: center;
+}
+.stickySmall {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #00395d;
+  color: #fff;
+  padding: 9px;
+  font-size: 20px;
+  z-index: 999;
+  text-align: center;
+}
+.stickyHeader {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #00395d;
+  color: #fff;
+  padding: 5px 0px;
+  font-size: 20px;
+  z-index: 999;
+}
+/* .blogFooterSticky {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  padding: 0px;
+  font-size: 20px;
+  z-index: 999;
+  text-align: center;
+} */
+.productsIcon img {
+  float: left;
+  height: 45px;
+  width: 150px;
+  padding: 0px;
+  margin-top: 25px;
+}
+div#Requirement {
+  float: left;
+  clear: both;
+}
+.productContent {
+  margin: auto 0;
+  height: 450px;
+  padding: 10px 0px;
+  min-height: calc(120vh - 150px - 50px);
+}
+.mobileContent {
+  min-height: calc(100vh - 150px - 50px);
+}
+.careerDetails p {
+  font-size: 15px;
+  line-height: 25px;
+}
+.blogsLink:hover {
+  color: #007239;
+  text-decoration: underline;
+}
+.blogThumb:hover {
+  opacity: 0.5;
+}
+.productFrm {
+  background: #fff !important;
+}
+.productFrmButton {
+  width: 100% !important;
+  min-width: 100% !important;
+}
+.formBtn button {
+  padding: 0px 20px;
+  background: #00395d;
+  color: #fff;
+  margin-top: 20px;
+  font-size: 15px;
+}
+.humbargerBtn {
+  margin-top: 0px !important;
+}
+.productSticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 130px;
+  background-color: #fff;
+  color: #fff;
+  padding: 20px 0px;
+  font-size: 15px;
+  z-index: 999;
+  text-align: left;
+  width: 100%;
+}
+.searchResultNav i.fa.fa-search {
+  font-size: 30px;
+  position: absolute;
+  right: 2px;
+  font-weight: 300;
+  top: 2px;
+  background: #00395d;
+  padding: 5px;
+  color: #fff;
+}
+i.fa.fa-search {
+  font-size: 30px;
+  position: absolute;
+  right: 57px;
+  font-weight: 300;
+  top: 1px;
+  background: #00395d;
+  padding: 6px;
+  color: #fff;
+}
+button {
+  padding: 10px 30px;
+  background: #00395d;
+  color: #fff;
+  margin-top: 20px;
+  font-size: 15px !important;
+}
+p button {
+  padding: 10px 25px;
+  background: #00395d;
+  color: #fff;
+  margin-top: 20px;
+  font-size: 15px;
+}
+.bannerOpacity {
+  opacity: 0.1;
+  background-color: #01395d;
+}
+.form-border {
+  border: solid 1px #ccc;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.avia_textblock ul li::before {
+  content: "■";
+  color: rgb(121 189 101);
+  padding-right: 15px;
+  font-size: 11px;
+  width: 10px !important;
+  height: 10px !important;
+}
+ul {
+  margin-top: 15px;
+  margin-left: 25px;
+}
+ul li {
+  color: #66899e;
+  line-height: 35px;
+  font-weight: 400;
+  font-size: 18px;
+  list-style: disc;
+}
+
+* {
+  box-sizing: border-box;
+}
+hr {
+  border-color: #72b664;
+}
+span {
+  font-size: 16px;
+  font-weight: 400;
+  color: #00395d;
+  margin: 10px 0px;
+}
+h3 {
+  font-size: 30px;
+  font-weight: bold;
+  color: #00395d;
+  float: left;
+  margin: 15px 0px;
+  clear: both;
+  width: 100%;
+  /* padding: 20px 0px; */
+}
+h5 {
+  font-size: 16px;
+  font-weight: semi-bold;
+  color: #00395d;
+  margin: 15px 0px;
+}
+h2 {
+  color: #fff;
+  font-size: 30px;
+}
+h4 {
+  font-size: 25px;
+  font-weight: 500;
+  color: #00395d;
+}
+p {
+  font-size: 18px;
+  line-height: 29.7px;
+  margin-top: 15px;
+  color: #66899e;
+}
+strong {
+  font-size: 23px;
+  line-height: 29.7px;
+  color: #00395d;
+}
+.avia_textblock strong {
+  font-size: 18px;
+  line-height: 29.7px;
+  color: #00395d;
+}
+section.slide-entry {
+  float: left;
+  width: 25%;
+}
+.rightPartner strong {
+  color: #a94068;
+  font-weight: 500;
+}
+.rightPartner h3 {
+  color: #00395d;
+  font-size: 30px;
+  font-weight: 400;
+}
+#steps section {
+  float: left;
+  width: 20%;
+}
+#steps .slide-entry-wrap.active-slide {
+  float: left;
+  width: 100%;
+  clear: both;
+  margin: 20px 0px;
+}
+section.slide-entry p img {
+  width: 115px;
+  height: 115px;
+  text-align: center;
+}
+h4 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 20px 0px 15px 0px;
+}
+.SuccessContent p {
+  font-size: 29px;
+  line-height: 45px;
+}
+
+/* Accordion for get started form starts */
+.accordion__section {
+  display: flex;
+  flex-direction: column;
+}
+.accordion {
+  background-color: rgb(239, 239, 239);
+  color: #f4c4;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  border: none;
+  outline: none;
+  transition: background-color 0.6s ease;
+}
+
+.accordion:hover,
+.active1 {
+  background-color: rgb(239, 239, 239);
+}
+.accordion__title {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  line-height: 25px;
+  width: 80%;
+  font-size: 15px;
+  color: #003a5d;
+  margin-top: auto;
+}
+.accordion__icon {
+  margin-left: auto;
+  transition: transform 0.6s ease;
+}
+.rotate {
+  transform: rotate(90deg);
+}
+.accordion__content {
+  color: #66899e;
+  flex: 1 1 auto;
+  background-color: white;
+  overflow: hidden;
+  transition: max-height 0.6s ease;
+  font-size: 1rem;
+  font-weight: 400;
+  max-height: 0;
+}
+.accordion__text {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 12px;
+}
+.accordion__text div {
+  font-size: 1rem;
+  color: #66899e;
+}
+/* Accordion for get started form ends */
+
+/* Signature Refresh Starts */
+.refresh div {
+  float: right;
+}
+/* Signature Refresh Ends */
+/* Individual product page Starts */
+.MuiPaper-elevation {
+  background-color: #fff !important;
+}
+.css-11yukd5-MuiTabs-indicator {
+  background-color: #00395d !important;
+}
+.nav-tab {
+  color: #aa446b !important;
+  font-weight: 700;
+}
