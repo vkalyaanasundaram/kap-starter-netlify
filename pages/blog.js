@@ -154,13 +154,20 @@ export default function InfiniteScrollList() {
                               key={index}
                               prefetch={false}
                             >
-                              <a>  {ReactHtmlParser(key?.title)}</a>
+                              <a>
+                                <span
+                                  dangerouslySetInnerHTML={{
+                                    __html: key?.title,
+                                  }}
+                                />
+                              </a>
                             </Link>
                           </div>
-                          <div>
-                            {ReactHtmlParser(key?.content?.substring(0, 400))}
-                            ...
-                          </div>
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: key?.content?.substring(0, 400),
+                            }}
+                          />
                           <div className="py-5">
                             <Link
                               href={`/blog/${key?.slug}`}
@@ -215,9 +222,12 @@ export default function InfiniteScrollList() {
                                 className="cursor-pointer blogThumb"
                               />
                             )}
-                            <div className="xs:text-center mx-10 md:text-lg text-blue-900 text-left cursor-pointer blogsLink">
-                              {ReactHtmlParser(key?.title)}...
-                            </div>
+                            <span
+                              className="xs:text-center mx-10 md:text-lg text-blue-900 text-left cursor-pointer blogsLink"
+                              dangerouslySetInnerHTML={{
+                                __html: key?.title,
+                              }}
+                            />
                           </div>
                         </Link>
                       </div>
