@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import useInView from "react-cool-inview";
 import dynamic from "next/dynamic";
-import ReactHtmlParser from "react-html-parser";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -48,9 +47,12 @@ export default function Contant() {
 
       <div ref={observe}>
         {inView && (
-          <div className="xs:w-full container px-5 mt-10 mb-10 mx-auto">
-            {ReactHtmlParser(data?.ThreeColumnStaticPage?.financeSolution)}
-          </div>
+          <div
+            className="xs:w-full container px-5 mt-10 mb-10 mx-auto"
+            dangerouslySetInnerHTML={{
+              __html: data?.ThreeColumnStaticPage?.financeSolution,
+            }}
+          />
         )}
       </div>
       <div ref={observe}>{inView && <Footer />}</div>

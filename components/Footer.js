@@ -4,7 +4,10 @@ import { useRouter } from "next/router";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const Footer = () => {
-  const { data, error } = useSWR("/api/page/footer", fetcher);
+  const { data, error } = useSWR("/api/page/footer", fetcher, {
+    revalidateOnMount: true,
+  });
+
   const footerMenu = data?.menuItems?.nodes;
   const productMenus = data?.productsServices?.nodes;
   if (error) return <div>failed to load</div>;

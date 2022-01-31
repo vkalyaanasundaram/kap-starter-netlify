@@ -7,7 +7,6 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import ReactHtmlParser, { htmlparser2 } from "react-html-parser";
 import {
   BrowserView,
   MobileView,
@@ -155,7 +154,7 @@ export default function InfiniteScrollList() {
                               key={index}
                               prefetch={false}
                             >
-                              <a> {ReactHtmlParser(key?.title)}</a>
+                              <a>  {ReactHtmlParser(key?.title)}</a>
                             </Link>
                           </div>
                           <div>

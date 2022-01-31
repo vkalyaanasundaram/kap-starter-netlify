@@ -8,7 +8,6 @@ import useInView from "react-cool-inview";
 
 import Header from "../../components/Header";
 import Banner from "../../components/Banner";
-import ReactHtmlParser from "react-html-parser";
 
 const Content = dynamic(() => import("../../components/PartnerContent"), {
   loading: function ld() {
@@ -52,9 +51,12 @@ export default function PartnerPage() {
         <div className="xs:w-full container px-5 mt-10 mb-10 mx-auto">
           <hr className="w-11/12" />
         </div>
-        <div className="xs:w-full container px-5 mt-10 mb-10 mx-auto text-center rightPartner">
-          {ReactHtmlParser(data?.PartnerACF?.rightPartnershipForYou)}
-        </div>
+        <div
+          className="xs:w-full container px-5 mt-10 mb-10 mx-auto text-center rightPartner"
+          dangerouslySetInnerHTML={{
+            __html: data?.PartnerACF?.rightPartnershipForYou,
+          }}
+        />
         <div className="xs:w-full container px-5 mt-10 mb-10 mx-auto">
           <hr className="w-11/12" />
         </div>
@@ -80,7 +82,11 @@ export default function PartnerPage() {
           <hr className="w-11/12" />
         </div>
         <div className="xs:w-full container px-5 my-20 mx-auto">
-          {ReactHtmlParser(data?.PartnerACF?.joinToday)}
+          <div
+            dangerouslySetInnerHTML={{
+              __html: data?.PartnerACF?.joinToday,
+            }}
+          />
           {asPath == "/partner/referral-partners" ? (
             <div></div>
           ) : (

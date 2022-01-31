@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import ReactHtmlParser from "react-html-parser";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -54,13 +53,16 @@ const Content = ({ data }) => {
                 )}
               </div>
 
-              <h2 className="text-3xl font-semibold text-center my-10 uppercase text-kapitus">
-                {ReactHtmlParser(value?.staticCardTitle)}
-              </h2>
+              <h2
+                className="text-3xl font-semibold text-center my-10 uppercase text-kapitus"
+                dangerouslySetInnerHTML={{
+                  __html: value?.staticCardTitle,
+                }}
+              />
               <div className="place-items-center">
-                <p className="mb-4 p-5">
-                  {ReactHtmlParser(value?.staticCardContent)}
-                </p>
+                <p className="mb-4 p-5"dangerouslySetInnerHTML={{
+                    __html: value?.staticCardContent }}
+ />
               </div>
               {asPath == "/partner" ? (
                 <div className="grid place-items-center w-full text-right my-5 absolute bottom-0">

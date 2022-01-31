@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import useInView from "react-cool-inview";
 import dynamic from "next/dynamic";
-import ReactHtmlParser from "react-html-parser";
 //import ScrollSpy from "react-ui-scrollspy";
 import SimpleReactLightbox, { SRLWrapper } from "simple-react-lightbox";
 import React, { useRef, useEffect, useState } from "react";
@@ -195,9 +194,12 @@ export default function AboutUs() {
       <Header />
       <AboutBanner data={data?.aboutUs} />
       <section>
-        <div className="xs:w-full container px-5 mt-10 mb-10 mx-auto">
-          {ReactHtmlParser(data?.aboutUs?.aboutDescription)}
-        </div>
+        <div
+          className="xs:w-full container px-5 mt-10 mb-10 mx-auto"
+          dangerouslySetInnerHTML={{
+            __html: data?.aboutUs?.aboutDescription,
+          }}
+        />
       </section>
       {isDesktopOrLaptop && (
         <>
@@ -388,16 +390,23 @@ export default function AboutUs() {
                   <h4>{value?.role}</h4>
                 </div>
                 <div className="text-sm careerDetails">
-                  <p>{ReactHtmlParser(value?.careerDetails)}</p>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: value?.careerDetails,
+                    }}
+                  />
                 </div>
               </div>
             ))}
           </Carousel>
         </section>
       )}
-      <section className="xs:w-full md: float-left mx-5 px-5 py-10">
-        {ReactHtmlParser(data?.aboutUs?.footeContent)}
-      </section>
+      <section
+        className="xs:w-full md: float-left mx-5 px-5 py-10"
+        dangerouslySetInnerHTML={{
+          __html: data?.aboutUs?.footeContent,
+        }}
+      />
       <section className="xs:w-full md:w-full float-left clear-both">
         <Footer />
       </section>

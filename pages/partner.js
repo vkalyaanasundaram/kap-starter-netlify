@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import useInView from "react-cool-inview";
 import dynamic from "next/dynamic";
-import ReactHtmlParser from "react-html-parser";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -26,7 +25,6 @@ export default function Contant() {
     // For better UX, we can grow the root margin so the image will be loaded before it comes to the viewport
     rootMargin: "50px",
   });
-
 
   const { data, error } = useSWR(`/api/page/${asPath}`, fetcher);
 
@@ -51,7 +49,7 @@ export default function Contant() {
                 {data?.accordionData?.accordion?.map((value, key) => (
                   <Accordion
                     title={value.accordionTitle}
-                    content={ReactHtmlParser(value.accordionContent)}
+                    content={value.accordionContent}
                     key={key}
                   />
                 ))}
@@ -70,9 +68,12 @@ export default function Contant() {
       </section>
       <section ref={observe}>
         {inView && (
-          <div className="xs:w-full container px-5 mt-10 mb-10 mx-auto">
-            {/* {ReactHtmlParser(data?.ThreeColumnStaticPage?.financeSolution)} */}
-          </div>
+          <div
+            className="xs:w-full container px-5 mt-10 mb-10 mx-auto"
+            dangerouslySetInnerHTML={{
+              __html: data?.ThreeColumnStaticPage?.financeSolution,
+            }}
+          />
         )}
       </section>
       <section ref={observe}>{inView && <Footer />}</section>

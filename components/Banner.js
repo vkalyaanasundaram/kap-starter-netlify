@@ -2,7 +2,6 @@ import Head from "next/head";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import ReactHtmlParser, { htmlparser2 } from "react-html-parser";
 import {
   bgWrap,
   bgText,
@@ -77,12 +76,21 @@ export default function Banner({ data }) {
                 <div className="xs:w-full text-3xl md:text-5xl">
                   {data?.staticBannerTitle}
                 </div>
-                <div className="text-sm md:text-xl lg:text-2xl text-descGreen my-10">
+                {/* <div className="text-sm md:text-xl lg:text-2xl text-descGreen my-10">
                   {ReactHtmlParser(data?.staticBannerDescription)}
-                </div>
-                <div className="xs:text-xs sm:text-lg mt-5 md:text-xl text-kapitus">
-                  {ReactHtmlParser(data?.staticBannerButton)}
-                </div>
+                </div> */}
+                <div
+                  className="text-sm md:text-xl lg:text-2xl text-descGreen my-10"
+                  dangerouslySetInnerHTML={{
+                    __html: data?.staticBannerDescription,
+                  }}
+                />
+                <div
+                  className="xs:text-xs sm:text-lg mt-5 md:text-xl text-kapitus"
+                  dangerouslySetInnerHTML={{
+                    __html: data?.staticBannerButton,
+                  }}
+                />
               </div>
 
               <div className="xs: hidden sm:hidden md:block ">

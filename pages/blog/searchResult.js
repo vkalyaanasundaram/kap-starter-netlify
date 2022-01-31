@@ -5,7 +5,6 @@ import "font-awesome/css/font-awesome.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import Header from "../../components/Header";
-import ReactHtmlParser from "react-html-parser";
 import Footer from "../../components/Footer";
 
 export default function SearchResult() {
@@ -62,9 +61,9 @@ export default function SearchResult() {
               {key + 1}
             </div>
             <h4 className="m-10">{value.title.rendered}</h4>
-            <p>
-              {ReactHtmlParser(value?.content?.rendered.substring(0, 500))}...
-            </p>
+            <p dangerouslySetInnerHTML={{
+            __html: value?.content?.rendered.substring(0, 500)}} 
+            />
           </div>
         ))}
       </div>

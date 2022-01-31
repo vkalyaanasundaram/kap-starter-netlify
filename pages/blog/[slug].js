@@ -1,7 +1,6 @@
 // Graphql components
 import Head from "next/head";
 // styles
-import ReactHtmlParser, { htmlparser2 } from "react-html-parser";
 import { useRouter } from "next/router";
 
 import useSWR from "swr";

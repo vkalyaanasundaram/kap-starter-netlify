@@ -2,7 +2,6 @@ import Head from "next/head";
 import NextImage from "next/image";
 
 import React, { useEffect } from "react";
-import ReactHtmlParser, { htmlparser2 } from "react-html-parser";
 import RecentBlogs from "./recentBlogs";
 import AllBlogs from "./allBlogs";
 import BlogCategories from "./categories";
@@ -76,9 +75,12 @@ const AcfData = ({ data }) => {
             </div>
           )}
         </div>
-        <div className="blogContent">
-          {ReactHtmlParser(blogData?.blogContent)}
-        </div>
+        <div
+          className="blogContent"
+          dangerouslySetInnerHTML={{
+            __html: blogData?.blogContent,
+          }}
+        />
       </div>
       <div className="xs:hidden lg:w-1/4 float-left border-gray-200 ">
         <RecentBlogs />

@@ -19,9 +19,13 @@ const Accordion = ({ title, content, id }) => {
           </div>
         </div>
         {isActive && (
-          <div className="accordion-content float-left p-5 bg-gray-100" id={id}>
-            {content}
-          </div>
+          <div
+            className="accordion-content float-left p-5 bg-gray-100"
+            id={id}
+            dangerouslySetInnerHTML={{
+              __html: content,
+            }}
+          />
         )}
       </div>
     </>

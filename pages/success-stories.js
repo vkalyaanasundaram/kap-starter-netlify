@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import useInView from "react-cool-inview";
 import dynamic from "next/dynamic";
-import ReactHtmlParser from "react-html-parser";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { contentNav } from "../styles/Home.module.css";
@@ -90,9 +89,12 @@ export default function SuccessStories() {
                 className="opacity-50"
               />
               &nbsp;
-              <div className="xs:w-full container px-5 m-10 mx-auto SuccessContent">
-                {ReactHtmlParser(value?.sliderContent)}
-              </div>
+              <div
+                className="xs:w-full container px-5 m-10 mx-auto SuccessContent"
+                dangerouslySetInnerHTML={{
+                  __html: value?.sliderContent,
+                }}
+              />
             </div>
           ))}
         </Carousel>
@@ -160,17 +162,23 @@ export default function SuccessStories() {
                   className="opacity-50"
                 />
                 &nbsp;
-                <div className="xs:w-full container px-5 m-10 mx-auto">
-                  {ReactHtmlParser(value?.carouselContent)}
-                </div>
+                <div
+                  className="xs:w-full container px-5 m-10 mx-auto"
+                  dangerouslySetInnerHTML={{
+                    __html: value?.carouselContent,
+                  }}
+                />
               </div>
             ))}
           </Carousel>
         </div>
       </div>
-      <div className="xs:w-full container px-5 mt-10 mb-10 mx-auto">
-        {ReactHtmlParser(data?.successStoriesACF?.footerContent)}
-      </div>
+      <div
+        className="xs:w-full container px-5 mt-10 mb-10 mx-auto"
+        dangerouslySetInnerHTML={{
+          __html: data?.successStoriesACF?.footerContent,
+        }}
+      />
       <div ref={observe}>{inView && <Footer />}</div>
     </>
   );

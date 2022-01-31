@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
 import React, { useEffect } from "react";
-import ReactHtmlParser, { htmlparser2 } from "react-html-parser";
 
 //GraphQL components and moduless
 import { gql } from "@apollo/client";

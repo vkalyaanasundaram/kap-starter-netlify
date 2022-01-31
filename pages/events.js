@@ -8,7 +8,6 @@ import useInView from "react-cool-inview";
 import dynamic from "next/dynamic";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import ReactHtmlParser from "react-html-parser";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -46,9 +45,13 @@ export default function Media() {
               ))}
             </TabList>
             {data?.events?.eventDetails.map((value, key) => (
-              <TabPanel key={key} className="react-tabs__tab-panel p-5">
-                {ReactHtmlParser(value?.events)}
-              </TabPanel>
+              <TabPanel
+                key={key}
+                className="react-tabs__tab-panel p-5"
+                dangerouslySetInnerHTML={{
+                  __html: value?.events,
+                }}
+              />
             ))}
           </Tabs>
         </div>

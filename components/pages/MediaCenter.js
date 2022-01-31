@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import ReactHtmlParser, { htmlparser2 } from "react-html-parser";
 import { useState, useEffect } from "react";
 import { contentNav } from "../../styles/Home.module.css";
 const MediaCenter = ({ data }) => {

@@ -1,7 +1,6 @@
 import Head from "next/head";
 import NextImage from "next/image";
 import React, { useEffect } from "react";
-import ReactHtmlParser, { htmlparser2 } from "react-html-parser";
 import useSWR from "swr";
 import { request } from "graphql-request";
 
@@ -103,9 +102,12 @@ const BlogData = () => {
               </div>
             )}
           </div>
-          <div className="blogContent p-5">
-            {ReactHtmlParser(blogData?.content)}
-          </div>
+          <div
+            className="blogContent p-5"
+            dangerouslySetInnerHTML={{
+              __html: blogData?.content,
+            }}
+          />
         </div>
         <div className="xs:hidden md:w-1/4 border-gray-200 ">
           <RecentBlogs />

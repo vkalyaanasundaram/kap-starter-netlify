@@ -10,14 +10,22 @@ import {
   FaTwitterSquare,
   FaYoutube,
 } from "react-icons/fa";
-import { HamburgerArrow } from "react-animated-burgers";
+import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function Header() {
+  const variants = {
+    open: { opacity: 1, x: 0 },
+    closed: { opacity: 0, x: "-100%" },
+  };
   const [isMenuVisible, setMenuVisibility] = useState(false);
-  const { data, error } = useSWR("/api/page/header", fetcher);
+
+  const { data, error } = useSWR("/api/page/header", fetcher, {
+    revalidateOnMount: true,
+  });
+
   const [isOpen, setOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [isActive, setIsActive] = useState(false);
@@ -140,14 +148,20 @@ export default function Header() {
             >
               <title>Menu</title>
               {/* <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /> */}
-
-              <HamburgerArrow
+              <i className="fas fa-bars"></i>
+              {/* <HamburgerArrow
                 buttonColor="#00395d"
                 barColor="white"
                 buttonWidth={15}
                 className="humbargerBtn"
                 {...{ isActive, toggleButton }}
-              />
+              /> */}
+              {/* <motion.nav
+                animate={isOpen ? "open" : "closed"}
+                variants={variants}
+              >
+                'Menu Content'
+              </motion.nav> */}
             </button>
           </div>
           <div

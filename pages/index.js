@@ -2,7 +2,6 @@ import Head from "next/head";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import Script from "next/script";
-import ReactHtmlParser, { htmlparser2 } from "react-html-parser";
 import {
   bgWrap,
   bgText,
@@ -146,21 +145,23 @@ export default function Home() {
                 <div className="xs:w-full text-3xl md:text-5xl">
                   {data?.page?.ThreeColumnStaticPage?.banner?.staticBannerTitle}
                 </div>
-                <div className="text-sm md:text-xl lg:text-2xl my-10">
-                  {ReactHtmlParser(
-                    data?.page?.ThreeColumnStaticPage?.banner
-                      ?.staticBannerDescription
-                  )}
-                </div>
+                <div
+                  className="text-sm md:text-xl lg:text-2xl my-10"
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      data?.page?.ThreeColumnStaticPage?.banner
+                        ?.staticBannerDescription,
+                  }}
+                />
                 <div
                   className="xs:text-xs sm:text-lg mt-5 md:text-2xl text-kapitus"
                   onClick={openForm}
-                >
-                  {ReactHtmlParser(
-                    data?.page?.ThreeColumnStaticPage?.banner
-                      ?.staticBannerButton
-                  )}
-                </div>
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      data?.page?.ThreeColumnStaticPage?.banner
+                        ?.staticBannerButton,
+                  }}
+                />
               </div>
 
               <div className="xs:hidden sm:hidden md:block "></div>

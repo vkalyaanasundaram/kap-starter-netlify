@@ -2,7 +2,6 @@ import Head from "next/head";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import ReactHtmlParser, { htmlparser2 } from "react-html-parser";
 import {
   bgWrap,
   bgText,
@@ -77,12 +76,18 @@ export default function Banner({ data }) {
                 <div className="xs:w-full text-3xl md:text-5xl">
                   {data?.aboutTitle}
                 </div>
-                <div className="text-sm md:text-xl lg:text-2xl my-10">
-                  {ReactHtmlParser(data?.bannerDescription)}
-                </div>
-                <div className="xs:text-xs sm:text-lg mt-5 md:text-2xl text-kapitus">
-                  {ReactHtmlParser(data?.bannerButton)}
-                </div>
+                <div
+                  className="text-sm md:text-xl lg:text-2xl my-10"
+                  dangerouslySetInnerHTML={{
+                    __html: data?.bannerDescription,
+                  }}
+                />
+                <div
+                  className="xs:text-xs sm:text-lg mt-5 md:text-2xl text-kapitus"
+                  dangerouslySetInnerHTML={{
+                    __html: data?.bannerButton,
+                  }}
+                />
               </div>
 
               <div className="xs: hidden sm:hidden md:block ">

@@ -254,6 +254,9 @@ section.slide-entry {
   float: left;
   width: 25%;
 }
+.avia_textblock ul li {
+  list-style: none;
+}
 .rightPartner strong {
   color: #a94068;
   font-weight: 500;

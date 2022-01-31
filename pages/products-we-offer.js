@@ -4,7 +4,6 @@ import Header from "../components/Header";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import useInView from "react-cool-inview";
-import ReactHtmlParser from "react-html-parser";
 import dynamic from "next/dynamic";
 
 import Products from "../components/Products";

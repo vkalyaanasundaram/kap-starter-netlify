@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useInView } from "react-cool-inview";
-import ReactHtmlParser from "react-html-parser";
 
 import useSWR from "swr";
 import { request } from "graphql-request";
@@ -50,9 +49,12 @@ const FAQ = () => {
               </div>
             </div>
             {isActive && (
-              <div className="accordion-content float-left p-5 bg-gray-100">
-                {ReactHtmlParser(value?.answer)}
-              </div>
+              <div
+                className="accordion-content float-left p-5 bg-gray-100"
+                dangerouslySetInnerHTML={{
+                  __html: value?.answer,
+                }}
+              />
             )}
           </div>
         ))}

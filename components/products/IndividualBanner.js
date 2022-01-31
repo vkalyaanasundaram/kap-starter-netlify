@@ -2,7 +2,6 @@ import Head from "next/head";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import ReactHtmlParser, { htmlparser2 } from "react-html-parser";
 import useSWR from "swr";
 import { request } from "graphql-request";
 import { useRouter } from "next/router";
@@ -21,11 +20,11 @@ import {
 } from "react-device-detect";
 
 export default function IndividualBanner({ data }) {
-  const MobileBannerImage = data?.mobileBannerImage?.sourceUrl;
-  const BannerImg = data?.banner?.sourceUrl;
-  const BannerTitle = data?.title;
-  const BannerDescription = data?.bannerDescription;
-  const BannerList = data?.bannerData;
+  const MobileBannerImage = data?.individualMobileBanner?.sourceUrl;
+  const BannerImg = data?.individualBanner?.sourceUrl;
+  const BannerTitle = data?.individualBannerTitle;
+  const BannerDescription = data?.individualBannerDescription;
+  const BannerList = data?.individualBannerData;
   const toBase64 = (str) =>
     typeof window === "undefined"
       ? Buffer.from(str).toString("base64")
@@ -73,7 +72,7 @@ export default function IndividualBanner({ data }) {
                 <Image
                   alt=""
                   src={BannerImg}
-                  width={data?.banner?.mediaDetails?.width}
+                  width={data?.individualBanner?.mediaDetails?.width}
                   // height={data?.banner?.mediaDetails?.height}
                   height={1150}
                   layout="responsive"
@@ -94,9 +93,12 @@ export default function IndividualBanner({ data }) {
                   <div className="xs:w-full text-2xl md:text-2xl lg:text-5xl">
                     {BannerTitle}
                   </div>
-                  <div className="xs:w-full my-5 md: text-lg lg:text-3xl text-green-900">
-                    {ReactHtmlParser(BannerDescription)}
-                  </div>
+                  <div
+                    className="xs:w-full my-5 md: text-lg lg:text-3xl text-green-900"
+                    dangerouslySetInnerHTML={{
+                      __html: BannerDescription,
+                    }}
+                  />
 
                   <div className="xs:text-sm mt-5 mb-5 md:text-xl text-kapitus">
                     {BannerList?.map((value, key) => (
@@ -104,12 +106,19 @@ export default function IndividualBanner({ data }) {
                         <div className="my-2 text-sm md:text-xl ">
                           {value?.listTitle}
                         </div>
-                        <div className="text-base leading-8">
-                          {ReactHtmlParser(value?.listItems)}
-                        </div>
+                        <div
+                          className="text-base leading-8"
+                          dangerouslySetInnerHTML={{
+                            __html: value?.listItems,
+                          }}
+                        />
                       </div>
                     ))}
-                    {ReactHtmlParser(data?.bannerButton)}
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: data?.bannerButton,
+                      }}
+                    />
                   </div>
 
                   <div className="xs:text-xl flex w-full sm: w-full mt-5 text-xs text-kapitus text-left copyrights">

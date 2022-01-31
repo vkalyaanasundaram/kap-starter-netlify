@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useInView from "react-cool-inview";
 import Link from "next/link";
-import ReactHtmlParser, { htmlparser2 } from "react-html-parser";
 
 import dynamic from "next/dynamic";
 import { contentNav } from "../../styles/Home.module.css";
@@ -45,15 +44,21 @@ const Content = ({ content, desc }) => {
     <>
       <section className="w-full">
         <section className="w-full py-10 px-5 bg-kapitus">
-          <div className="container text-center text-white text-2xl">
-            {ReactHtmlParser(desc)}
-          </div>
+          <div
+            className="container text-center text-white text-2xl"
+            dangerouslySetInnerHTML={{
+              __html: desc,
+            }}
+          />
         </section>
         <section>
           <div className="container">
-            <div className="xs:px-5 ml-5 md:px-5 my-10">
-              {ReactHtmlParser(content)}
-            </div>
+            <div
+              className="xs:px-5 ml-5 md:px-5 my-10"
+              dangerouslySetInnerHTML={{
+                __html: content,
+              }}
+            />
           </div>
         </section>
       </section>

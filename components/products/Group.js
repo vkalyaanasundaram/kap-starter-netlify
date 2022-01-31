@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import ReactHtmlParser, { htmlparser2 } from "react-html-parser";
 
 import useSWR from "swr";
 import { request } from "graphql-request";

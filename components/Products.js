@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import ReactHtmlParser from "react-html-parser";
 
 const toBase64 = (str) =>
   typeof window === "undefined"
@@ -35,7 +34,11 @@ export default function ProductsContainer({ data }) {
     <>
       <div className="w-full p-10">
         <div className="container mx-auto">
-          <div>{ReactHtmlParser(data?.ourGoal)}</div>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: data?.ourGoal,
+            }}
+          />
           <div className="container">
             <section className="grid gap-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3">
               {data?.productsCards?.map((value, key) => (
@@ -60,13 +63,19 @@ export default function ProductsContainer({ data }) {
                     )}
                   </div>
 
-                  <h2 className="text-3xl font-semibold text-center my-10 uppercase text-kapitus">
-                    {ReactHtmlParser(value?.cardTitle)}
-                  </h2>
+                  <h2
+                    className="text-3xl font-semibold text-center my-10 uppercase text-kapitus"
+                    dangerouslySetInnerHTML={{
+                      __html: value?.cardTitle,
+                    }}
+                  />
                   <div className="place-items-center">
-                    <p className="mb-4 p-5">
-                      {ReactHtmlParser(value?.cardContent)}
-                    </p>
+                    <p
+                      className="mb-4 p-5"
+                      dangerouslySetInnerHTML={{
+                        __html: value?.cardContent,
+                      }}
+                    />
                   </div>
 
                   <div className="grid place-items-center w-full text-right my-5 absolute bottom-0">
@@ -75,15 +84,20 @@ export default function ProductsContainer({ data }) {
                       onClick={(e) => {
                         cardPage(value?.cardSlug);
                       }}
-                    >
-                      {ReactHtmlParser(value?.cardButton)}
-                    </button>
+                      dangerouslySetInnerHTML={{
+                        __html: value?.cardButton,
+                      }}
+                    />
                   </div>
                 </div>
               ))}
             </section>
           </div>
-          <div>{ReactHtmlParser(data?.getStartedToday)}</div>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: data?.getStartedToday,
+            }}
+          />
         </div>
       </div>
     </>

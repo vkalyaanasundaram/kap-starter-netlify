@@ -11,7 +11,7 @@ export default function ProductsBlogs({ data }) {
         <div className="float-left my-10">
           <h3>{data?.individualProducts?.blogHeading}</h3>
         </div>
-        {data?.individualProducts?.blogs.map((value, key) => (
+        {data?.individualProducts?.individualBlogs?.map((value, key) => (
           <div key={key} className="my-20">
             <>
               {key == 0 ? (

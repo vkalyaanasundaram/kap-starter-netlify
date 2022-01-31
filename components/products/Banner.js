@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import ReactHtmlParser, { htmlparser2 } from "react-html-parser";
 import {
   bgWrap,
   bgText,
@@ -88,18 +87,24 @@ export default function ProductsBanner({ data }) {
                 <div className="xs:w-full text-2xl my-5 lg:text-5xl">
                   {data?.pageBannerTitle}
                 </div>
-                <div className="xs:w-full md: text-lg lg:text-3xl text-green-900">
-                  {ReactHtmlParser(data?.bannerDescription)}
-                </div>
+                <div
+                  className="xs:w-full md: text-lg lg:text-3xl text-green-900"
+                  dangerouslySetInnerHTML={{
+                    __html: data?.bannerDescription,
+                  }}
+                />
                 <div className="text-kapitus">
                   {BannerList?.map((value, key) => (
                     <div key={key}>
                       <div className="my-2 text-sm md:text-xl ">
                         {value?.title}
                       </div>
-                      <div className="text-base leading-8">
-                        {ReactHtmlParser(value?.listsItems)}
-                      </div>
+                      <div
+                        className="text-base leading-8"
+                        dangerouslySetInnerHTML={{
+                          __html: value?.listsItems,
+                        }}
+                      />
                     </div>
                   ))}
                   {/* {ReactHtmlParser(data?.bannerButton)} */}

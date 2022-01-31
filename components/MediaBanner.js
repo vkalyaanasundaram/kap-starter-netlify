@@ -2,7 +2,6 @@ import Head from "next/head";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import ReactHtmlParser, { htmlparser2 } from "react-html-parser";
 import {
   BrowserView,
   MobileView,
@@ -83,12 +82,18 @@ export default function MediaBanner({ data }) {
               <div className="xs:w-full text-lg md:text-5xl">
                 {data?.bannerTitle}
               </div>
-              <div className="xs:w-full text-base text-green-900 lg:text-2xl my-10 text-green-900">
-                {ReactHtmlParser(data?.bannerDescription)}
-              </div>
-              <div className="xs:text-sm mt-5 md:text-2xl text-kapitus">
-                {ReactHtmlParser(data?.bannerButton)}
-              </div>
+              <div
+                className="xs:w-full text-base text-green-900 lg:text-2xl my-10 text-green-900"
+                dangerouslySetInnerHTML={{
+                  __html: data?.bannerDescription,
+                }}
+              />
+              <div
+                className="xs:text-sm mt-5 md:text-2xl text-kapitus"
+                dangerouslySetInnerHTML={{
+                  __html: data?.bannerButton,
+                }}
+              />
 
               <div className="xs:text-xl mt-5 text-xs text-blue-900 text-left copyrights">
                 <p className="mt-5 text-xs">

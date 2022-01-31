@@ -13,18 +13,10 @@ import "react-multi-carousel/lib/styles.css";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-// const ProductBanner = dynamic(() =>
-//   import("../../components/products/IndividualBanner")
-// );
 const InvoiceBannerNav = dynamic(() =>
   import("../../components/products/InvoiceBanner")
 );
-// const Content = dynamic(() => import("../../components/products/Content"), {
-//   loading: function ld() {
-//     return <p>Loading...</p>;
-//   },
-//   ssr: false,
-// });
+
 const GroupColumn = dynamic(() => import("../../components/products/Group"), {
   loading: function ld() {
     return <p>Loading...</p>;
@@ -125,7 +117,8 @@ export default function ProductPage() {
   if (!data) return <div>loading...</div>;
   const individualProducts = data?.individualProducts;
   const IndividualBanner = data?.individualProducts;
-  const ProductDescription = data?.individualProducts?.businessLoanDescription;
+  const ProductDescription =
+    data?.individualProducts?.individualProductDescription;
   const ProductContent = data?.individualProducts?.productsContent;
   const RequirementsData = data?.individualProducts?.requirements;
   const HowToApply = data?.individualProducts?.howToApply;

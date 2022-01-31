@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import ReactHtmlParser from "react-html-parser";
 import Image from "next/image";
 
 import { ContentNav, StaticContent } from "../styles/Home.module.css";
@@ -49,13 +48,19 @@ const Content = ({ data }) => {
                   )}`}
                 />
               </div>
-              <h2 className="text-xl font-semibold text-center text-kapitus my-5">
-                {ReactHtmlParser(value?.cardTitle)}
-              </h2>
+              <h2
+                className="text-xl font-semibold text-center text-kapitus my-5"
+                dangerouslySetInnerHTML={{
+                  __html: value?.cardTitle,
+                }}
+              />
               <div className="text-center place-items-center">
-                <div className="mb-4 px-5">
-                  {ReactHtmlParser(value?.cardContent)}
-                </div>
+                <div
+                  className="mb-4 px-5"
+                  dangerouslySetInnerHTML={{
+                    __html: value?.cardContent,
+                  }}
+                />
               </div>
             </div>
           ))}

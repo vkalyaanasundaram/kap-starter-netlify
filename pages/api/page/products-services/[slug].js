@@ -53,41 +53,33 @@ export default async function handler(req, resp) {
     query ProductPage($id: ID!) {
         productsService(idType: URI, id: $id) {
           individualProducts {
-            banner {
+            individualBanner {
               mediaDetails {
-                file
-                width
-                height
-              }
-              sourceUrl
-            }
-            bannerDescription
-            title
-            mobileBannerImage {
-              mediaDetails {
-                file
                 height
                 width
               }
               sourceUrl
             }
-            businessLoanDescription
+            individualMobileBanner {
+              sourceUrl
+              mediaDetails {
+                height
+                width
+              }
+            }
+            individualProductDescription
+            individualBannerData {
+              listItems
+              listTitle
+            }
+            individualBannerDescription
+            individualBannerTitle
             productsContent
             requirements
-            howToApply
             whoShould
-            bannerData {
-              listTitle
-              listItems
-            }
-            blogHeading
-            blogs {
-              title
+            individualBlogs {
               blogLink
-              blogImage {
-                sourceUrl
-                altText
-              }
+              title
               description
             }
           }

@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 
-import ReactHtmlParser, { htmlparser2 } from "react-html-parser";
 import Image from "next/image";
 // import Pagination from 'next-pagination'
 
@@ -22,7 +21,12 @@ function postPagination(posts) {
 
         <div className="grid grid-cols-3 gap-4">
           {allBlogs.map((key, index) => (
-            <div key={index}>{ReactHtmlParser(key.title.rendered)}</div>
+            <div
+              key={index}
+              dangerouslySetInnerHTML={{
+                __html: key.title.rendered,
+              }}
+            />
           ))}
         </div>
       </div>

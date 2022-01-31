@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import ReactHtmlParser, { htmlparser2 } from "react-html-parser";
 
 import useSWR from "swr";
 import { useRouter } from "next/router";
@@ -38,9 +37,12 @@ const GroupColumn = ({ columnone, columnTwo, data }) => {
                     alt=""
                   />
                 </div>
-                <h3 className="mb-2 text-center p-2">
-                  {ReactHtmlParser(value?.groupOneTitle)}
-                </h3>
+                <h3
+                  className="mb-2 text-center p-2"
+                  dangerouslySetInnerHTML={{
+                    __html: value?.groupOneTitle,
+                  }}
+                />
                 <div className="place-items-center">
                   <p className="mb-4 p-5">{value?.groupOneContent}</p>
                 </div>
@@ -78,9 +80,12 @@ const GroupColumn = ({ columnone, columnTwo, data }) => {
                     alt=""
                   />
                 </div>
-                <h3 className="mb-2 text-center p-2">
-                  {ReactHtmlParser(value?.groupTitle)}
-                </h3>
+                <h3
+                  className="mb-2 text-center p-2"
+                  dangerouslySetInnerHTML={{
+                    __html: value?.groupTitle,
+                  }}
+                />
                 <div className="place-items-center">
                   <p className="mb-4 p-5">{value?.groupContent}</p>
                 </div>
