@@ -1,4 +1,4 @@
-export default async (req, res) => {
+export default async function handler(req, resp) {
   // Check the secret and next parameters
   // This secret should only be known to this API route and the CMS
   console.log(req.query);
@@ -24,4 +24,4 @@ export default async (req, res) => {
   // Redirect to the path from the fetched post
   // We don't redirect to req.query.slug as that might lead to open redirect vulnerabilities
   res.redirect(post.slug);
-};
+}
