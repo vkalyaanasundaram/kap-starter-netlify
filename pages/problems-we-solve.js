@@ -59,6 +59,7 @@ export default function Contant({ ProblmesData }) {
 }
 
 export async function getStaticProps() {
+  console.log("Generating/Regenerating");
   const client = new ApolloClient({
     uri: process.env.WORDPRESS_GRAPHQL_ENDPOINT,
     cache: new InMemoryCache(),
@@ -118,63 +119,4 @@ export async function getStaticProps() {
   };
 }
 
-// export async function getStaticPaths() {
-//   const client = new ApolloClient({
-//     uri: process.env.WORDPRESS_GRAPHQL_ENDPOINT,
-//     cache: new InMemoryCache(),
-//   });
-
-//   const { data, error } = await client.query({
-//     query: gql`
-//       query HomePage {
-//         page(id: "/problems-we-solve", idType: URI) {
-//           title
-//           ThreeColumnStaticPage {
-//             banner {
-//               staticBannerButton
-//               staticBannerDescription
-//               staticBannerTitle
-//               staticMobileBannerImage {
-//                 sourceUrl
-//                 mediaDetails {
-//                   width
-//                   height
-//                 }
-//               }
-//               staticBannerImage {
-//                 sourceUrl
-//                 mediaDetails {
-//                   height
-//                   width
-//                 }
-//               }
-//             }
-//             financeSolution
-//             cards {
-//               staticCardContent
-//               staticCardButton
-//               staticButtonLink
-//               staticCardTitle
-//             }
-//           }
-//           carouselAcf {
-//             carouselData {
-//               carouselContent
-//               carouselImage {
-//                 sourceUrl
-//               }
-//             }
-//           }
-//         }
-//       }
-//     `,
-//   });
-
-//   // Get the paths we want to pre-render based on posts
-//   const paths = data;
-
-//   // We'll pre-render only these paths at build time.
-//   // { fallback: blocking } will server-render pages
-//   // on-demand if the path doesn't exist.
-//   return { paths, fallback: "blocking" };
-// }
+}
