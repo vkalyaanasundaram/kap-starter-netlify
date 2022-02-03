@@ -58,7 +58,7 @@ export default function Contant({ ProblmesData }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticPaths() {
   console.log("Generating/Regenerating Site");
   const client = new ApolloClient({
     uri: process.env.WORDPRESS_GRAPHQL_ENDPOINT,
@@ -115,6 +115,6 @@ export async function getStaticProps() {
     props: {
       ProblmesData: data,
     },
-    revalidate: 10, // 10 seconds
+    fallback: true,
   };
 }
