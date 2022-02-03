@@ -116,65 +116,65 @@ export async function getStaticProps() {
     },
     revalidate: 10, // 10 seconds
   };
+}
 
-  export async function getStaticPaths() {
-    const client = new ApolloClient({
-      uri: process.env.WORDPRESS_GRAPHQL_ENDPOINT,
-      cache: new InMemoryCache(),
-    });
+export async function getStaticPaths() {
+  const client = new ApolloClient({
+    uri: process.env.WORDPRESS_GRAPHQL_ENDPOINT,
+    cache: new InMemoryCache(),
+  });
 
-    const { data, error } = await client.query({
-      query: gql`
-        query HomePage {
-          page(id: "/problems-we-solve", idType: URI) {
-            title
-            ThreeColumnStaticPage {
-              banner {
-                staticBannerButton
-                staticBannerDescription
-                staticBannerTitle
-                staticMobileBannerImage {
-                  sourceUrl
-                  mediaDetails {
-                    width
-                    height
-                  }
-                }
-                staticBannerImage {
-                  sourceUrl
-                  mediaDetails {
-                    height
-                    width
-                  }
+  const { data, error } = await client.query({
+    query: gql`
+      query HomePage {
+        page(id: "/problems-we-solve", idType: URI) {
+          title
+          ThreeColumnStaticPage {
+            banner {
+              staticBannerButton
+              staticBannerDescription
+              staticBannerTitle
+              staticMobileBannerImage {
+                sourceUrl
+                mediaDetails {
+                  width
+                  height
                 }
               }
-              financeSolution
-              cards {
-                staticCardContent
-                staticCardButton
-                staticButtonLink
-                staticCardTitle
+              staticBannerImage {
+                sourceUrl
+                mediaDetails {
+                  height
+                  width
+                }
               }
             }
-            carouselAcf {
-              carouselData {
-                carouselContent
-                carouselImage {
-                  sourceUrl
-                }
+            financeSolution
+            cards {
+              staticCardContent
+              staticCardButton
+              staticButtonLink
+              staticCardTitle
+            }
+          }
+          carouselAcf {
+            carouselData {
+              carouselContent
+              carouselImage {
+                sourceUrl
               }
             }
           }
         }
-      `,
-    });
+      }
+    `,
+  });
 
-    // Get the paths we want to pre-render based on posts
-    const paths = data;
+  // Get the paths we want to pre-render based on posts
+  const paths = data;
 
-    // We'll pre-render only these paths at build time.
-    // { fallback: blocking } will server-render pages
-    // on-demand if the path doesn't exist.
-    return { paths, fallback: "blocking" };
-  }
+  // We'll pre-render only these paths at build time.
+  // { fallback: blocking } will server-render pages
+  // on-demand if the path doesn't exist.
+  return { paths, fallback: "blocking" };
 }
