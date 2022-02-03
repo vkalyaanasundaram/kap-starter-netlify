@@ -20,20 +20,12 @@ const Footer = dynamic(() => import("../components/Footer"), {
   ssr: false,
 });
 export default function Contant({ ProblmesData }) {
-  const { asPath, pathname } = useRouter();
   const { observe, inView } = useInView({
     // Stop observe when the target enters the viewport, so the "inView" only triggered once
     unobserveOnEnter: true,
     // For better UX, we can grow the root margin so the image will be loaded before it comes to the viewport
     rootMargin: "50px",
   });
-
-  // const { data, error } = useSWR(`/api/page/${asPath}`, fetcher, {
-  //   revalidateOnMount: true,
-  // });
-
-  // if (error) return <div>failed to load</div>;
-  // if (!data) return <div>loading...</div>;
 
   const BannerData = ProblmesData?.page?.ThreeColumnStaticPage?.banner;
 
@@ -58,8 +50,9 @@ export default function Contant({ ProblmesData }) {
   );
 }
 
-export async function getStaticPaths() {
-  console.log("Generating/Regenerating Site");
+export async function getStaticProps(context) {
+  // console.log("Generating/Regenerating");
+
   const client = new ApolloClient({
     uri: process.env.WORDPRESS_GRAPHQL_ENDPOINT,
     cache: new InMemoryCache(),
@@ -115,6 +108,6 @@ export async function getStaticPaths() {
     props: {
       ProblmesData: data,
     },
-    fallback: true,
+    revalidate: 10, // 10 seconds
   };
 }
