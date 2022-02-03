@@ -59,7 +59,7 @@ export default function Contant({ ProblmesData }) {
 }
 
 export async function getStaticProps() {
-  console.log("Generating/Regenerating");
+  console.log("Generating/Regenerating Site");
   const client = new ApolloClient({
     uri: process.env.WORDPRESS_GRAPHQL_ENDPOINT,
     cache: new InMemoryCache(),
@@ -117,6 +117,4 @@ export async function getStaticProps() {
     },
     revalidate: 10, // 10 seconds
   };
-}
-
 }
