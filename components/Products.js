@@ -62,16 +62,17 @@ export default function ProductsContainer({ data }) {
                       />
                     )}
                   </div>
-
-                  <h2
-                    className="text-3xl font-semibold text-center my-10 uppercase text-kapitus"
-                    dangerouslySetInnerHTML={{
-                      __html: value?.cardTitle,
-                    }}
-                  />
+                  <div className="px-2">
+                    <h2
+                      className="text-3xl font-semibold text-center my-5 uppercase text-kapitus"
+                      dangerouslySetInnerHTML={{
+                        __html: value?.cardTitle,
+                      }}
+                    />
+                  </div>
                   <div className="place-items-center">
                     <p
-                      className="mb-4 p-5"
+                      className="mb-4 px-7"
                       dangerouslySetInnerHTML={{
                         __html: value?.cardContent,
                       }}

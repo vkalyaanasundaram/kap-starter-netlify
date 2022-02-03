@@ -1,16 +1,18 @@
+import { ApolloClient, gql, InMemoryCache } from "@apollo/client";
 import Link from "next/link";
 import Image from "next/image";
 import Header from "../components/Header";
 import Banner from "../components/Banner";
 import { useRouter } from "next/router";
-import useSWR from "swr";
+// import useSWR from "swr";
 import useInView from "react-cool-inview";
 import dynamic from "next/dynamic";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import CarouselComponent from "../components/Carousel";
 import { contentNav } from "../styles/Home.module.css";
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+// const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const Footer = dynamic(() => import("../components/Footer"), {
   loading: function ld() {
@@ -19,17 +21,17 @@ const Footer = dynamic(() => import("../components/Footer"), {
   ssr: false,
 });
 
-export default function SuccessStories() {
+export default function SuccessStories({ data }) {
   const { asPath, pathname } = useRouter();
   const { observe, inView } = useInView({
     onEnter: ({ unobserve }) => unobserve(), // only run once
     onLeave: ({ observe }) => observe(),
   });
 
-  const { data, error } = useSWR(`/api/page/${asPath}`, fetcher);
+  // const { data, error } = useSWR(`/api/page/${asPath}`, fetcher);
 
-  if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
+  // if (error) return <div>failed to load</div>;
+  // if (!data) return <div>loading...</div>;
   //   alert(data?.successStoriesACF?.pageLargeSlider);
   const responsive = {
     superLargeDesktop: {
@@ -71,7 +73,7 @@ export default function SuccessStories() {
           itemClass="carousel-item-padding-40-px"
           removeArrowOnDeviceType={["tablet", "mobile"]}
         >
-          {data?.successStoriesACF?.pageLargeSlider?.map((value, key) => (
+          {data?.page?.successStoriesACF?.pageLargeSlider?.map((value, key) => (
             // alert(value?.sliderImage?.sourceUrl),
             <div
               key={key}
@@ -102,27 +104,29 @@ export default function SuccessStories() {
       <div className="xs:w-full container px-5 mt-10 mb-10 mx-auto">
         <div className="container">
           <section className="grid gap-4 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3">
-            {data?.successStoriesACF?.suggestedResources?.map((value, key) => (
-              <div key={key} className="bg-gray-100 p-10 border-4">
-                <div className="text-center">
-                  <Link href={value?.link} target="_blank">
-                    <a target="_blank">
-                      <Image
-                        src={value?.svgIcon?.sourceUrl}
-                        width={100}
-                        height={100}
-                        alt=""
-                      />
-                    </a>
-                  </Link>
+            {data?.page?.successStoriesACF?.suggestedResources?.map(
+              (value, key) => (
+                <div key={key} className="bg-gray-100 p-10 border-4">
+                  <div className="text-center">
+                    <Link href={value?.link} target="_blank">
+                      <a target="_blank">
+                        <Image
+                          src={value?.svgIcon?.sourceUrl}
+                          width={100}
+                          height={100}
+                          alt=""
+                        />
+                      </a>
+                    </Link>
+                  </div>
+                  <div className="text-center mt-10 font-semibold text-xl text-kapitus ">
+                    <Link href={value?.link} target="_blank">
+                      <a target="_blank">{value?.resourceContent}</a>
+                    </Link>
+                  </div>
                 </div>
-                <div className="text-center mt-10 font-semibold text-xl text-kapitus ">
-                  <Link href={value?.link} target="_blank">
-                    <a target="_blank">{value?.resourceContent}</a>
-                  </Link>
-                </div>
-              </div>
-            ))}
+              )
+            )}
           </section>
         </div>
       </div>
@@ -144,33 +148,36 @@ export default function SuccessStories() {
             itemClass="carousel-item-padding-40-px"
             removeArrowOnDeviceType={["tablet", "mobile"]}
           >
-            {data?.successStoriesACF?.carouselSlider?.map((value, key) => (
-              // alert(value?.sliderImage?.sourceUrl),
-              <div
-                key={key}
-                width={value?.sliderImage?.sourceUrl?.mediaDetails?.width}
-                style={{ minHeight: "500px" }}
-              >
-                <Image
-                  src={value?.carouselImage?.sourceUrl}
-                  // width={getWidth() * value?.carouselImage?.sourceUrl.length}
-                  width={value?.carouselImage?.sourceUrl?.mediaDetails?.width}
-                  height={value?.carouselImage?.mediaDetails?.height}
-                  layout="fill"
-                  alt=""
-                  objectFit="cover"
-                  className="opacity-50"
-                />
-                &nbsp;
+            {data?.page?.successStoriesACF?.carouselSlider?.map(
+              (value, key) => (
+                // alert(value?.sliderImage?.sourceUrl),
                 <div
-                  className="xs:w-full container px-5 m-10 mx-auto"
-                  dangerouslySetInnerHTML={{
-                    __html: value?.carouselContent,
-                  }}
-                />
-              </div>
-            ))}
+                  key={key}
+                  width={value?.sliderImage?.sourceUrl?.mediaDetails?.width}
+                  style={{ minHeight: "500px" }}
+                >
+                  <Image
+                    src={value?.carouselImage?.sourceUrl}
+                    // width={getWidth() * value?.carouselImage?.sourceUrl.length}
+                    width={value?.carouselImage?.sourceUrl?.mediaDetails?.width}
+                    height={value?.carouselImage?.mediaDetails?.height}
+                    layout="fill"
+                    alt=""
+                    objectFit="cover"
+                    className="opacity-50"
+                  />
+                  &nbsp;
+                  <div
+                    className="xs:w-full container px-5 m-10 mx-auto"
+                    dangerouslySetInnerHTML={{
+                      __html: value?.carouselContent,
+                    }}
+                  />
+                </div>
+              )
+            )}
           </Carousel>
+          
         </div>
       </div>
       <div
@@ -182,4 +189,57 @@ export default function SuccessStories() {
       <div ref={observe}>{inView && <Footer />}</div>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const client = new ApolloClient({
+    uri: process.env.WORDPRESS_GRAPHQL_ENDPOINT,
+    cache: new InMemoryCache(),
+  });
+
+  const { data, error } = await client.query({
+    query: gql`
+      query SuccessStories {
+        page(idType: URI, id: "/success-stories") {
+          successStoriesACF {
+            pageLargeSlider {
+              sliderContent
+              sliderImage {
+                sourceUrl
+                sizes(size: LARGE)
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+            }
+            suggestedResources {
+              svgIcon {
+                sourceUrl
+              }
+              link
+              resourceContent
+            }
+            carouselSlider {
+              carouselContent
+              carouselImage {
+                sourceUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+            }
+            footerContent
+          }
+        }
+      }
+    `,
+  });
+  // console.log(data);
+  return {
+    props: {
+      data: data,
+    },
+  };
 }

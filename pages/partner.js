@@ -1,3 +1,4 @@
+import { ApolloClient, gql, InMemoryCache } from "@apollo/client";
 import Link from "next/link";
 import Image from "next/image";
 import Header from "../components/Header";
@@ -17,7 +18,7 @@ const Footer = dynamic(() => import("../components/Footer"), {
   },
   ssr: false,
 });
-export default function Contant() {
+export default function Contant({ data }) {
   const { asPath, pathname } = useRouter();
   const { observe, inView } = useInView({
     // Stop observe when the target enters the viewport, so the "inView" only triggered once
@@ -26,19 +27,21 @@ export default function Contant() {
     rootMargin: "50px",
   });
 
-  const { data, error } = useSWR(`/api/page/${asPath}`, fetcher);
+  // const { data, error } = useSWR(`/api/page/${asPath}`, fetcher);
 
-  if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
+  // if (error) return <div>failed to load</div>;
+  // if (!data) return <div>loading...</div>;
 
-  const BannerData = data?.ThreeColumnStaticPage?.banner;
+  const BannerData = data?.page?.ThreeColumnStaticPage?.banner;
   return (
     <>
       <Header />
       <Banner data={BannerData} />
       <div className="py-10 px-5">
         <div ref={observe}>
-          {inView && <Content data={data?.ThreeColumnStaticPage?.cards} />}
+          {inView && (
+            <Content data={data?.page?.ThreeColumnStaticPage?.cards} />
+          )}
         </div>
       </div>
       <section ref={observe} className="w-full">
@@ -46,7 +49,7 @@ export default function Contant() {
           <div className="container">
             <div className="xs:grid-cols-1 md:grid grid-cols-2 gap-4">
               <div className="md:w-full mx-auto">
-                {data?.accordionData?.accordion?.map((value, key) => (
+                {data?.page?.accordionData?.accordion?.map((value, key) => (
                   <Accordion
                     title={value.accordionTitle}
                     content={value.accordionContent}
@@ -79,4 +82,65 @@ export default function Contant() {
       <section ref={observe}>{inView && <Footer />}</section>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const client = new ApolloClient({
+    uri: process.env.WORDPRESS_GRAPHQL_ENDPOINT,
+    cache: new InMemoryCache(),
+  });
+
+  const { data, error } = await client.query({
+    query: gql`
+      query PartnerPage {
+        page(id: "/partner", idType: URI) {
+          title
+          uri
+          ThreeColumnStaticPage {
+            banner {
+              staticBannerButton
+              staticBannerDescription
+              staticBannerTitle
+              staticMobileBannerImage {
+                sourceUrl
+                mediaDetails {
+                  width
+                  height
+                }
+              }
+              staticBannerImage {
+                sourceUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+            }
+            cards {
+              staticCardTitle
+              staticCardContent
+              staticCardButton
+              staticButtonLink
+              staticSvgIcon {
+                sourceUrl
+              }
+            }
+            financeSolution
+          }
+          accordionData {
+            accordion {
+              accordionTitle
+              accordionContent
+            }
+          }
+        }
+      }
+    `,
+  });
+  // console.log(data);
+  return {
+    props: {
+      data: data,
+    },
+  };
 }

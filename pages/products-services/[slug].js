@@ -10,6 +10,7 @@ import Content from "../../components/products/Content";
 import { useMediaQuery } from "react-responsive";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Accordion from "../../components/Accordion";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -123,6 +124,8 @@ export default function ProductPage() {
   const RequirementsData = data?.individualProducts?.requirements;
   const HowToApply = data?.individualProducts?.howToApply;
   const WhoShould = data?.individualProducts?.whoShould;
+  const faq = data?.faqAcf?.faqs;
+  console.log(faq);
 
   // invoiceTemplate
   const invoiceTemplate = data?.invoiceTemplate;
@@ -241,7 +244,16 @@ export default function ProductPage() {
             {inView && <GroupColumn />}
           </div>
           <div className="container" ref={observe}>
-            {inView && <FAQ />}
+            {/* {inView && <FAQ data={faq.question, faq.answer} />} */}
+            <div className="w-3/4">
+              {faq?.map((value, key) => (
+                <Accordion
+                  title={value.question}
+                  content={value.answer}
+                  key={key}
+                />
+              ))}
+            </div>
           </div>
           <section className="container my-10" ref={observe}>
             {inView && <ProductsBlogs data={data} />}

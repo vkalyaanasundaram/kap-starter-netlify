@@ -82,37 +82,39 @@ export default function ProductsBanner({ data }) {
         </div>
         <div className="container">
           <div className={bgText}>
-            <div className="xs:grid col-auto lg:grid grid-cols-2 gap-1 p-3">
-              <div className="text-kapitus mb-10">
-                <div className="xs:w-full text-2xl my-5 lg:text-5xl">
-                  {data?.pageBannerTitle}
-                </div>
-                <div
-                  className="xs:w-full md: text-lg lg:text-3xl text-green-900"
-                  dangerouslySetInnerHTML={{
-                    __html: data?.bannerDescription,
-                  }}
-                />
-                <div className="text-kapitus">
-                  {BannerList?.map((value, key) => (
-                    <div key={key}>
-                      <div className="my-2 text-sm md:text-xl ">
-                        {value?.title}
+            <div className="container">
+              <div className="xs:grid col-auto lg:grid grid-cols-2 gap-1 p-3">
+                <div className="text-kapitus mb-10">
+                  <div className="xs:w-full text-2xl my-5 lg:text-5xl">
+                    {data?.pageBannerTitle}
+                  </div>
+                  <div
+                    className="xs:w-full md: text-lg lg:text-3xl text-green-900"
+                    dangerouslySetInnerHTML={{
+                      __html: data?.bannerDescription,
+                    }}
+                  />
+                  <div className="text-kapitus">
+                    {BannerList?.map((value, key) => (
+                      <div key={key}>
+                        <div className="my-2 text-sm md:text-xl ">
+                          {value?.title}
+                        </div>
+                        <div
+                          className="text-base leading-8"
+                          dangerouslySetInnerHTML={{
+                            __html: value?.listsItems,
+                          }}
+                        />
                       </div>
-                      <div
-                        className="text-base leading-8"
-                        dangerouslySetInnerHTML={{
-                          __html: value?.listsItems,
-                        }}
-                      />
-                    </div>
-                  ))}
-                  {/* {ReactHtmlParser(data?.bannerButton)} */}
+                    ))}
+                    {/* {ReactHtmlParser(data?.bannerButton)} */}
+                  </div>
                 </div>
-              </div>
 
-              <div className="xs: hidden sm: hidden md:block ">
-                <CommonShortForm />
+                <div className="xs: hidden sm: hidden md:block ">
+                  <CommonShortForm />
+                </div>
               </div>
             </div>
           </div>

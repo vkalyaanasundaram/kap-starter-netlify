@@ -88,79 +88,81 @@ export default function IndividualBanner({ data }) {
           </div>
           <div className="container">
             <div className={bgText}>
-              <div className="xs:grid col-auto lg:grid grid-cols-2 gap-1 p-3">
-                <div className="text-kapitus mb-10 z-50">
-                  <div className="xs:w-full text-2xl md:text-2xl lg:text-5xl">
-                    {BannerTitle}
-                  </div>
-                  <div
-                    className="xs:w-full my-5 md: text-lg lg:text-3xl text-green-900"
-                    dangerouslySetInnerHTML={{
-                      __html: BannerDescription,
-                    }}
-                  />
-
-                  <div className="xs:text-sm mt-5 mb-5 md:text-xl text-kapitus">
-                    {BannerList?.map((value, key) => (
-                      <div key={key}>
-                        <div className="my-2 text-sm md:text-xl ">
-                          {value?.listTitle}
-                        </div>
-                        <div
-                          className="text-base leading-8"
-                          dangerouslySetInnerHTML={{
-                            __html: value?.listItems,
-                          }}
-                        />
-                      </div>
-                    ))}
+              <div className="container">
+                <div className="xs:grid col-auto lg:grid grid-cols-2 gap-1 p-3">
+                  <div className="text-kapitus mb-10 z-50">
+                    <div className="xs:w-full text-2xl md:text-2xl lg:text-5xl">
+                      {BannerTitle}
+                    </div>
                     <div
+                      className="xs:w-full my-5 md: text-lg lg:text-3xl text-green-900"
                       dangerouslySetInnerHTML={{
-                        __html: data?.bannerButton,
+                        __html: BannerDescription,
                       }}
                     />
+
+                    <div className="xs:text-sm mt-5 mb-5 md:text-xl text-kapitus">
+                      {BannerList?.map((value, key) => (
+                        <div key={key}>
+                          <div className="my-2 text-sm md:text-xl ">
+                            {value?.listTitle}
+                          </div>
+                          <div
+                            className="text-base leading-8"
+                            dangerouslySetInnerHTML={{
+                              __html: value?.listItems,
+                            }}
+                          />
+                        </div>
+                      ))}
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: data?.bannerButton,
+                        }}
+                      />
+                    </div>
+
+                    <div className="xs:text-xl flex w-full sm: w-full mt-5 text-xs text-kapitus text-left copyrights">
+                      <span className="xs:w-full flex-col ">
+                        <Image
+                          title="25k"
+                          src="https://kap-staging.us/wp-content/uploads/2020/05/25k.svg"
+                          alt=""
+                          width={175}
+                          height={45}
+                        />
+                      </span>
+                      <span className="xs:w-full flex-col ">
+                        <Image
+                          title="trustpilot"
+                          src="https://kap-staging.us/wp-content/uploads/2020/05/trustpilot.svg"
+                          alt=""
+                          width={175}
+                          height={45}
+                        />
+                      </span>
+
+                      <span className="xs:w-full flex-col">
+                        <Image
+                          title="billion"
+                          src="https://kap-staging.us/wp-content/uploads/2020/05/billion.svg"
+                          alt=""
+                          width={175}
+                          height={45}
+                        />
+                      </span>
+                    </div>
+                    <p className="flex-row mt-5 text-xs">
+                      Copyright 2021 • Kapitus • All Rights Reserved Loans made
+                      in California are issued by Strategic Funding Source, Inc.
+                      dba Kapitus, pursuant to California Finance Lenders
+                      License No. 603-G807.
+                    </p>
                   </div>
 
-                  <div className="xs:text-xl flex w-full sm: w-full mt-5 text-xs text-kapitus text-left copyrights">
-                    <span className="xs:w-full flex-col ">
-                      <Image
-                        title="25k"
-                        src="https://kap-staging.us/wp-content/uploads/2020/05/25k.svg"
-                        alt=""
-                        width={175}
-                        height={45}
-                      />
-                    </span>
-                    <span className="xs:w-full flex-col ">
-                      <Image
-                        title="trustpilot"
-                        src="https://kap-staging.us/wp-content/uploads/2020/05/trustpilot.svg"
-                        alt=""
-                        width={175}
-                        height={45}
-                      />
-                    </span>
-
-                    <span className="xs:w-full flex-col">
-                      <Image
-                        title="billion"
-                        src="https://kap-staging.us/wp-content/uploads/2020/05/billion.svg"
-                        alt=""
-                        width={175}
-                        height={45}
-                      />
-                    </span>
+                  <div className="xs:w-full hidden sm:hidden md:block z-50">
+                    <ApplyNow />
                   </div>
-                  <p className="flex-row mt-5 text-xs">
-                    Copyright 2021 • Kapitus • All Rights Reserved Loans made in
-                    California are issued by Strategic Funding Source, Inc. dba
-                    Kapitus, pursuant to California Finance Lenders License No.
-                    603-G807.
-                  </p>
-                </div>
-
-                <div className="xs:w-full hidden sm:hidden md:block z-50">
-                  <ApplyNow />
                 </div>
               </div>
             </div>

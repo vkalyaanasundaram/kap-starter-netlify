@@ -52,6 +52,12 @@ export default async function handler(req, resp) {
     QUERY_SINGLE_POST = `
     query ProductPage($id: ID!) {
         productsService(idType: URI, id: $id) {
+          faqAcf {
+            faqs {
+              question
+              answer
+            }
+          }
           individualProducts {
             individualBanner {
               mediaDetails {
@@ -77,6 +83,7 @@ export default async function handler(req, resp) {
             productsContent
             requirements
             whoShould
+            
             individualBlogs {
               blogLink
               title

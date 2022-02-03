@@ -257,6 +257,25 @@ section.slide-entry {
 .avia_textblock ul li {
   list-style: none;
 }
+.accordion-content ol li {
+  color: #66899e;
+  font-size: 16px;
+  list-style-type: disc;
+  margin: 10px 20px;
+}
+.accordion-content {
+  background-color: #ededed !important;
+}
+.accordion-title div span {
+  font-size: 18px;
+  color: #66899e;
+}
+.accordion-content p {
+  font-size: 16px;
+  line-height: 23.7px;
+  margin-top: 15px;
+  color: #66899e;
+}
 .rightPartner strong {
   color: #a94068;
   font-weight: 500;

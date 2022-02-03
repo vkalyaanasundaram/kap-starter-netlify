@@ -26,7 +26,8 @@ const nextConfig = {
     domains: ["kap-staging.us"],
   },
   env: {
-    WP_HEADLESS_SECRET: "adb05f33-6f44-4433-9e79-9f995018b28a",
+    // WP_HEADLESS_SECRET: "adb05f33-6f44-4433-9e79-9f995018b28a",
+    WP_HEADLESS_SECRET: "cc859e6c-df81-4d1d-85ca-31d70a7d19df",
     WORDPRESS_GRAPHQL_ENDPOINT: "https://kap-staging.us/graphql",
     WORDPRESS_URL: "https://kap-staging.us/",
     MAPBOX_TOKEN:

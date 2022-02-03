@@ -12,9 +12,11 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 import useInView from "react-cool-inview";
 import Link from "next/link";
+import { ApolloClient, gql, InMemoryCache } from "@apollo/client";
 
 import Header from "../components/Header";
 import Banner from "../components/Banner";
+import Content from "../components/Content";
 
 const Footer = dynamic(() => import("../components/Footer"), {
   loading: function ld() {
@@ -23,12 +25,13 @@ const Footer = dynamic(() => import("../components/Footer"), {
   ssr: false,
 });
 
-export default function Home() {
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+export default function Home({ HomeData }) {
+  // console.log("HomeData" + HomeData);
+  // const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-  const { data, error } = useSWR("/api/page/home", fetcher, {
-    revalidateOnMount: true,
-  });
+  // const { data, error } = useSWR("/api/page/home", fetcher, {
+  //   revalidateOnMount: true,
+  // });
 
   let { asPath, pathname } = useRouter();
   const router = useRouter();
@@ -82,9 +85,6 @@ export default function Home() {
     }, 700);
   };
 
-  if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
-
   return (
     <>
       <Header />
@@ -92,18 +92,18 @@ export default function Home() {
       <section className="relative">
         <div className="opacity-40">
           <div className={heroDesktopImage}>
-            {data?.page?.ThreeColumnStaticPage?.banner?.staticBannerImage
+            {HomeData?.page?.ThreeColumnStaticPage?.banner?.staticBannerImage
               ?.sourceUrl?.length > 0 && (
               <Image
                 src={
-                  data?.page?.ThreeColumnStaticPage?.banner?.staticBannerImage
-                    ?.sourceUrl
+                  HomeData?.page?.ThreeColumnStaticPage?.banner
+                    ?.staticBannerImage?.sourceUrl
                 }
                 width={
-                  data?.page?.ThreeColumnStaticPage?.banner?.staticBannerImage
-                    ?.mediaDetails?.width
+                  HomeData?.page?.ThreeColumnStaticPage?.banner
+                    ?.staticBannerImage?.mediaDetails?.width
                 }
-                // height={data?.staticBannerImage?.mediaDetails?.height}
+                // height={HomeData?.staticBannerImage?.mediaDetails?.height}
                 height={350}
                 layout="intrinsic"
                 objectFit="cover"
@@ -117,11 +117,11 @@ export default function Home() {
             )}
           </div>
           <div className={heroMobileImage}>
-            {data?.page?.ThreeColumnStaticPage?.banner?.staticMobileBannerImage
-              ?.sourceUrl?.length > 0 && (
+            {HomeData?.page?.ThreeColumnStaticPage?.banner
+              ?.staticMobileBannerImage?.sourceUrl?.length > 0 && (
               <Image
                 src={
-                  data?.page?.ThreeColumnStaticPage?.banner
+                  HomeData?.page?.ThreeColumnStaticPage?.banner
                     ?.staticMobileBannerImage?.sourceUrl
                 }
                 width={500}
@@ -143,13 +143,16 @@ export default function Home() {
             <div className="xs:grid col-auto lg:grid grid-cols-2 gap-1 p-3">
               <div className="text-kapitus mb-10">
                 <div className="xs:w-full text-3xl md:text-5xl">
-                  {data?.page?.ThreeColumnStaticPage?.banner?.staticBannerTitle}
+                  {
+                    HomeData?.page?.ThreeColumnStaticPage?.banner
+                      ?.staticBannerTitle
+                  }
                 </div>
                 <div
                   className="text-sm md:text-xl lg:text-2xl my-10"
                   dangerouslySetInnerHTML={{
                     __html:
-                      data?.page?.ThreeColumnStaticPage?.banner
+                      HomeData?.page?.ThreeColumnStaticPage?.banner
                         ?.staticBannerDescription,
                   }}
                 />
@@ -158,7 +161,7 @@ export default function Home() {
                   onClick={openForm}
                   dangerouslySetInnerHTML={{
                     __html:
-                      data?.page?.ThreeColumnStaticPage?.banner
+                      HomeData?.page?.ThreeColumnStaticPage?.banner
                         ?.staticBannerButton,
                   }}
                 />
@@ -181,6 +184,7 @@ export default function Home() {
         )}
       </section>
       {/* Three Card Section */}
+
       <section ref={observe}>
         {inView && (
           <div className="container my-10">
@@ -277,4 +281,48 @@ export default function Home() {
       </Head>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const client = new ApolloClient({
+    uri: process.env.WORDPRESS_GRAPHQL_ENDPOINT,
+    cache: new InMemoryCache(),
+  });
+
+  const { data, error } = await client.query({
+    query: gql`
+      query HomePage {
+        page(id: "index-2", idType: URI) {
+          title
+          ThreeColumnStaticPage {
+            banner {
+              staticBannerButton
+              staticBannerDescription
+              staticBannerTitle
+              staticMobileBannerImage {
+                sourceUrl
+                mediaDetails {
+                  width
+                  height
+                }
+              }
+              staticBannerImage {
+                sourceUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+  });
+  // console.log(data);
+  return {
+    props: {
+      HomeData: data,
+    },
+  };
 }
