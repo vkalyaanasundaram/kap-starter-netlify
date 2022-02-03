@@ -114,6 +114,6 @@ export async function getStaticProps() {
     props: {
       ProblmesData: data,
     },
-    revalidate: 10,
+    revalidate: 10 // 10 seconds 
   };
 }
